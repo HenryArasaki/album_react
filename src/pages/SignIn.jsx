@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
 
+import { useAuth } from "../hooks/auth";
+
 import Button from "../components/Button";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const {signIn} = useAuth()
+
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -17,6 +22,7 @@ export default function SignIn() {
 
   function handleFormSubmit(e){
     e.preventDefault()
+    signIn({email,password})
   }
 
   return (

@@ -1,12 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { api } from "../service/api";
 
 import Button from "../components/Button";
+import { ErrorResponse } from "@remix-run/router";
 
 export default function SignUp() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+
+  const navigate = useNavigate()
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -16,17 +25,49 @@ export default function SignUp() {
     setPassword(e.target.value);
   }
 
-  function handlePassword2Change(){
+  function handlePassword2Change(e){
     setPassword2(e.target.value)
   }
 
   function handleFormSubmit(e){
     e.preventDefault()
+    
+    if(!name || !email || !password || !password2){
+      return alert("Prencha todos os campos")
+    }
+
+    if (password !== password2){
+      return alert("Senhas diferentes")
+    }
+
+    api.post("/users",{name,email,password})
+    .then(()=>{
+      alert("Cadastro efetuado com sucesso")
+      navigate("/signin")
+    })
+    .catch(error=>{
+      if(error.response){
+        alert(error.response.data.message)
+      }else{
+        alert("Não foi possivel cadastrar")
+      }
+    })
+
   }
 
   return (
     <div className="bg-blue-50 h-screen">
       <form onSubmit={handleFormSubmit}>
+        <label htmlFor="name">
+          Name
+          <input
+            type="text"
+            value={name}
+            id="name"
+            name="name"
+            onChange={handleNameChange}
+          />
+        </label>
         <label htmlFor="email">
           E-mail
           <input
