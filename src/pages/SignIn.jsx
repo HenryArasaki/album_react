@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useAuth } from "../hooks/auth";
 
@@ -8,6 +8,8 @@ import Button from "../components/Button";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate()
 
   const {signIn} = useAuth()
 
@@ -23,6 +25,7 @@ export default function SignIn() {
   function handleFormSubmit(e){
     e.preventDefault()
     signIn({email,password})
+    navigate("/")
   }
 
   return (
