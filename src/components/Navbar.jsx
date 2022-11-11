@@ -8,7 +8,8 @@ export default function Navbar(){
             <h1 className="w-full">Albumzinho brabo</h1>
             <div>
             <nav>
-                <Link to="/">Albums</Link>    
+                <Link to="/">Home</Link>
+                <Link to="/albums">Albums</Link>
             </nav>
             <button onClick={signOut}>Logout</button>
             </div>

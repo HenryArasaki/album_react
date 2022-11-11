@@ -43,7 +43,7 @@ export default function SignUp() {
     api.post("/users",{name,email,password})
     .then(()=>{
       alert("Cadastro efetuado com sucesso")
-      navigate("/signin")
+      navigate("/")
     })
     .catch(error=>{
       if(error.response){
@@ -100,7 +100,7 @@ export default function SignUp() {
         </label>
         <Button><input className="hover:cursor-pointer" type="submit"/></Button>
       </form>
-      <Link to="/signin">SignIn</Link>
+      <Link to="/">SignIn</Link>
 
     </div>
   );
