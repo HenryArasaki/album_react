@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/auth";
 import Button from "../components/Button";
 import { api } from "../service/api";
+import {Link} from 'react-router-dom'
+
 
 import Navbar from "../components/Navbar";
 
 export default function Albums() {
   const [albums, setAlbums] = useState([]);
   const { signOut, user } = useAuth();
-  const { name } = user;
 
   useEffect(() => {
     async function fetchAlbums() {
@@ -24,7 +25,7 @@ export default function Albums() {
       <ul>
         {albums &&
           albums.map((album) => {
-            return <li key={album.id}>{album.name}</li>;
+            return <li key={album.id}><Link to="#">{album.name}</Link></li>;
           })}
       </ul>
       <Button>Crate new Album</Button>
