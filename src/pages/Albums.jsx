@@ -25,7 +25,7 @@ export default function Albums() {
       <ul>
         {albums &&
           albums.map((album) => {
-            return <li key={album.id}><Link to="#">{album.name}</Link></li>;
+            return <li key={album.id}><Link to={`/album/:${album.id}}`}>{album.name}</Link></li>;
           })}
       </ul>
       <Button>Crate new Album</Button>
