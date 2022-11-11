@@ -3,6 +3,8 @@ import { useAuth } from "../hooks/auth";
 import Button from "../components/Button";
 import { api } from "../service/api";
 
+import Navbar from "../components/Navbar";
+
 export default function Albums() {
   const [albums, setAlbums] = useState([]);
   const { signOut, user } = useAuth();
@@ -18,15 +20,13 @@ export default function Albums() {
 
   return (
     <div className="bg-blue-50 h-screen">
-      <h1>Albums</h1>
-      <p>Olá, {name}</p>
+      <Navbar/>
       <ul>
         {albums &&
           albums.map((album) => {
             return <li key={album.id}>{album.name}</li>;
           })}
       </ul>
-      <Button onClick={signOut}>SignOut</Button>
     </div>
   );
 }
