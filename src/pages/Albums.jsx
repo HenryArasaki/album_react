@@ -27,6 +27,7 @@ export default function Albums() {
             return <li key={album.id}>{album.name}</li>;
           })}
       </ul>
+      <Button>Crate new Album</Button>
     </div>
   );
 }
