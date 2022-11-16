@@ -10,6 +10,7 @@ export default function Album() {
   const [pageNumber, setPageNumber] = useState(0);
   const [lastPage, setLastPage] = useState(0);
   const { album_id } = useParams();
+  console.log(album_id)
 
 
 
@@ -24,10 +25,16 @@ export default function Album() {
   useEffect(() => {
     async function fechPages() {
       const response = await api.get(`/albums/${album_id}`);
-      setAlbum(response.album);
-      setPages(response.pages,()=>setLastPage(pages.length));
+      setAlbum(response.data);
+      setPages(response.data.pages);
+      console.log(response.data.pages)
     }
-  }, [album, pages]);
+    fechPages()
+  }, []);
+
+  useEffect(()=>{
+    setLastPage(pages.length)
+  },[pages])
 
   if (!album) {
     return <span>Carregando...</span>;
@@ -35,13 +42,16 @@ export default function Album() {
     if (pages) {
       return (
         <>
-          <Button disabled={pageNumber<=0} onClick={handleLeftClick}>&#47;</Button>
-          <Button disabled={pageNumber>=lastPage} onClick={handleRightClick}>&#47;</Button>
+          {pages.map(page=>{
+            return (<div key={page.id}>
+            <h3>{page.title}</h3>
+            <img src={page.photo} alt="" />
+            </div>)
+          })}
+          <Button disabled={pageNumber<=0} onClick={handleLeftClick}>&#60;</Button>
+          <Button disabled={pageNumber>=lastPage} onClick={handleRightClick}>&#62;</Button>
         </>
       );
-      pages.map(page, (index) => (
-        <Page visibility={index == pageNumber} key={index} details={page} />
-      ));
     } else {
       return <span>Album sem paginas</span>;
     }

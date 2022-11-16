@@ -1,5 +1,6 @@
 import {Routes,Route} from 'react-router-dom'
 import Albums from '../pages/Albums'
+import Album from '../pages/Album'
 import Home from '../pages/Home'
 
 
