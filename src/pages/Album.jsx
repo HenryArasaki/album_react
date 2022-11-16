@@ -8,9 +8,9 @@ export default function Album() {
   const [album, setAlbum] = useState({});
   const [pages, setPages] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const [lastPage, setLastPage] = useState(0);
   const { album_id } = useParams();
   console.log(album_id)
+  let lastPage = 0
 
 
 
@@ -33,7 +33,7 @@ export default function Album() {
   }, []);
 
   useEffect(()=>{
-    setLastPage(pages.length)
+    lastPage = pages.length
   },[pages])
 
   if (!album) {
