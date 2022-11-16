@@ -11,11 +11,30 @@ export default function Albums() {
   const [albums, setAlbums] = useState([]);
   const { signOut, user } = useAuth();
 
-  useEffect(() => {
-    async function fetchAlbums() {
-      const response = await api.get("/albums");
-      setAlbums(response.data);
+  function handleCreateAlbum(){
+    let name = prompt("Nome do album.", "Album");
+    if (name != null) {
+      api.post("/albums",{name,isPublic:false})
+      .then(()=>{
+        alert("Album criado com sucesso")
+        fetchAlbums();
+      })
+      .catch(error=>{
+        if(error.response){
+          alert(error.response.data.message)
+        }else{
+          alert("Não foi possivel criar o album")
+        }
+      })
     }
+  }
+
+  async function fetchAlbums() {
+    const response = await api.get("/albums");
+    setAlbums(response.data);
+  }
+
+  useEffect(() => {
     fetchAlbums();
   });
 
@@ -28,7 +47,7 @@ export default function Albums() {
             return <li key={album.id}><Link to={`/album/${album.id}`}>{album.name}</Link></li>;
           })}
       </ul>
-      <Button>Crate new Album</Button>
+      <Button onClick={handleCreateAlbum}>Crate new Album</Button>
     </div>
   );
 }
