@@ -42,8 +42,8 @@ export default function Album() {
     if (pages) {
       return (
         <>
-          {pages.map(page=>{
-            return (<div key={page.id}>
+          {pages.map(page,index=>{
+            return (<div key={page.id} pagina={page.id}>
               <h3>{page.date} - {page.title}</h3>
               <img src={page.photo} alt="" />
               <p>{page.description}</p>
