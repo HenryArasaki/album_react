@@ -44,8 +44,9 @@ export default function Album() {
         <>
           {pages.map(page=>{
             return (<div key={page.id}>
-            <h3>{page.title}</h3>
-            <img src={page.photo} alt="" />
+              <h3>{page.date} - {page.title}</h3>
+              <img src={page.photo} alt="" />
+              <p>{page.description}</p>
             </div>)
           })}
           <Button disabled={pageNumber<=0} onClick={handleLeftClick}>&#60;</Button>
