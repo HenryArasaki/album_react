@@ -3,11 +3,13 @@ import { api } from "../service/api";
 import { useParams } from "react-router-dom";
 import Button from "../components/Button";
 import Page from "../components/Page";
+import NewPageModal from "../components/NewPageModal";
 
 export default function Album() {
   const [album, setAlbum] = useState({});
   const [pages, setPages] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const [creatingNewPage, setCreatingNewPage] =useState(false)
   const { album_id } = useParams();
   console.log(album_id)
   let lastPage = 0
@@ -20,6 +22,10 @@ export default function Album() {
 
   function handleRightClick(){
     setPageNumber(prev=>prev + 1)
+  }
+
+  function handleNewPage(){
+
   }
 
   useEffect(() => {
@@ -39,9 +45,11 @@ export default function Album() {
   if (!album) {
     return <span>Carregando...</span>;
   } else {
+    <NewPageModal visible={creatingNewPage} album_id={album_id}/>
     if (pages) {
       return (
-        <>
+        <> 
+          <Button onClick={handleNewPage}>New page</Button>
           {pages.map(page,index=>{
             return <Page visibility={index == pageNumber} key={page.id} details={page} />
           })}
