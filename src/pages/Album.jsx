@@ -43,11 +43,7 @@ export default function Album() {
       return (
         <>
           {pages.map(page,index=>{
-            return (<div key={page.id} pagina={page.id}>
-              <h3>{page.date} - {page.title}</h3>
-              <img src={page.photo} alt="" />
-              <p>{page.description}</p>
-            </div>)
+            return <Page visibility={index == pageNumber} key={page.id} details={page} />
           })}
           <Button disabled={pageNumber<=0} onClick={handleLeftClick}>&#60;</Button>
           <Button disabled={pageNumber>=lastPage} onClick={handleRightClick}>&#62;</Button>
