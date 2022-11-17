@@ -9,7 +9,7 @@ export default function Page({ details, pageNumber, thisPage }) {
     >
       <h3 className="text-4xl text-center">{title}</h3>
       <p className="text-xl">{description}</p>
-      <img className="object-cover" src={photo} />
+      <img className="object-cover rounded-lg border border-black" src={photo} />
       <span className="text-l text-right">{date}</span>
     </div>
   );
