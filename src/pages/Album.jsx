@@ -4,61 +4,97 @@ import { useParams } from "react-router-dom";
 import Button from "../components/Button";
 import Page from "../components/Page";
 import NewPageModal from "../components/NewPageModal";
+import Navbar from "../components/Navbar";
 
 export default function Album() {
   const [album, setAlbum] = useState({});
   const [pages, setPages] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const [creatingNewPage, setCreatingNewPage] =useState(false)
+  const [lastPage, setLastPage] = useState(0);
+  const [creatingNewPage, setCreatingNewPage] = useState(false);
   const { album_id } = useParams();
-  console.log(album_id)
-  let lastPage = 0
+  // console.log(album_id)
 
-
-
-  function handleLeftClick(){
-    setPageNumber(prev=>prev - 1)
+  function handleLeftClick() {
+    if (pageNumber > 0) {
+      setPageNumber((prev) => prev - 1);
+      console.log("left");
+    }
   }
 
-  function handleRightClick(){
-    setPageNumber(prev=>prev + 1)
+  function handleRightClick() {
+    if (pageNumber < lastPage - 1) {
+      setPageNumber((prev) => prev + 1);
+      console.log("right");
+    }
   }
 
-  function handleNewPage(){
+  function handleNewPage() {
+    setCreatingNewPage(true);
+  }
 
+  async function fechPages() {
+    const response = await api.get(`/albums/${album_id}`);
+    setAlbum(response.data);
+    setPages(response.data.pages);
+    // console.log(response.data.pages)
+  }
+  function handleModalClose() {
+    setCreatingNewPage(false);
+    fechPages();
   }
 
   useEffect(() => {
-    async function fechPages() {
-      const response = await api.get(`/albums/${album_id}`);
-      setAlbum(response.data);
-      setPages(response.data.pages);
-      console.log(response.data.pages)
-    }
-    fechPages()
+    fechPages();
   }, []);
 
-  useEffect(()=>{
-    lastPage = pages.length
-  },[pages])
+  useEffect(() => {
+    console.log(pageNumber);
+  });
+
+  useEffect(() => {
+    setLastPage(pages.length);
+  }, [pages]);
 
   if (!album) {
-    return <span>Carregando...</span>;
+    return (
+      <>
+        <Navbar />
+        <span>Carregando...</span>
+      </>
+    );
   } else {
-    <NewPageModal visible={creatingNewPage} album_id={album_id}/>
     if (pages) {
       return (
-        <> 
+        <>
+          <Navbar />
+          <NewPageModal
+            creatingNewPage={creatingNewPage}
+            album_id={album_id}
+            onModalClose={handleModalClose}
+          />
           <Button onClick={handleNewPage}>New page</Button>
-          {pages.map(page,index=>{
-            return <Page visibility={index == pageNumber} key={page.id} details={page} />
+          {pages.map((page, index) => {
+            return (
+              <Page
+                pageNumber={pageNumber}
+                thisPage={index}
+                key={page.id}
+                details={page}
+              />
+            );
           })}
-          <Button disabled={pageNumber<=0} onClick={handleLeftClick}>&#60;</Button>
-          <Button disabled={pageNumber>=lastPage} onClick={handleRightClick}>&#62;</Button>
+          <Button onClick={handleLeftClick}>&#60;</Button>
+          <Button onClick={handleRightClick}>&#62;</Button>
         </>
       );
     } else {
-      return <span>Album sem paginas</span>;
+      return (
+        <>
+          <Navbar />
+          <span>Album sem paginas</span>
+        </>
+      );
     }
   }
 }

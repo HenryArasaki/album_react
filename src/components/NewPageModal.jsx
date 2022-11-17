@@ -9,10 +9,14 @@ export default function NewPageModal(props) {
   const [date, setDate] = useState("");
   const [photo, setPhoto] = useState("");
 
-  const visible = props.visible;
-  const album_id = props.album_id;
+  // const visible = props.visible;
+  // const album_id = props.album_id;
+  // const onModalClose = props.onModalClose;
 
-  function handleSubmit() {
+  const {creatingNewPage,album_id,onModalClose} = props
+
+  function handleSubmit(e) {
+    e.preventDefault()
     if (!title || !date || !photo) {
       return alert("Preencha todos os dados");
     }
@@ -22,10 +26,10 @@ export default function NewPageModal(props) {
       );
     }
     api
-      .post(`/pages/${album_id}`, { title, description, date })
+      .post(`/pages/${album_id}`, { title, description, date, photo })
       .then(() => {
         alert("Pagina criada com sucesso");
-        fetchAlbums();
+        onModalClose();
       })
       .catch((error) => {
         if (error.response) {
@@ -36,24 +40,28 @@ export default function NewPageModal(props) {
       });
   }
 
-  function handlePhotoChange(e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      // Use a regex to remove data url part
-      const base64String = reader.result
-        .replace("data:", "")
-        .replace(/^.+,/, "");
+  async function handlePhotoChange(e) {
+    const convertBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
 
-      console.log(base64String);
-      setPhoto(base64String);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
 
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
+      });
     };
-    reader.readAsDataURL(file);
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setPhoto(base64);
   }
 
   return (
-    <>
+    <div className={creatingNewPage == true ? "block" : "hidden"}>
       <section>
         <div>
           <form onSubmit={handleSubmit}>
@@ -82,7 +90,8 @@ export default function NewPageModal(props) {
             <input
               id="page-photo"
               type="file"
-              value={photo}
+              // value=""
+              accept="image/png, image/gif, image/jpeg"
               onChange={handlePhotoChange}
             />
             <Button type="submit">Submit</Button>
@@ -90,6 +99,6 @@ export default function NewPageModal(props) {
         </div>
       </section>
       <div></div>
-    </>
+    </div>
   );
 }

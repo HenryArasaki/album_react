@@ -1,9 +1,9 @@
 
 
-export default function Page({details,visibility}){
+export default function Page({details,pageNumber,thisPage}){
     const {title,description,date,photo} = details
 
-    return(<div className={`${visibility?"block":"hidden"}`}>
+    return(<div className={`${pageNumber == thisPage ?"block":"hidden"}`}>
         <h3>{title}</h3>
         <p>{description}</p>
         <img src={photo} />
