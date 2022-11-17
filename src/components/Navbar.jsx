@@ -1,19 +1,22 @@
-import {Link} from 'react-router-dom'
-import {useAuth} from '../hooks/auth'
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/auth";
 
-export default function Navbar(){
-    const {signOut} = useAuth()
-    return (
-        <div className="bg-indigo-200">
-            <h1 className="w-full">Albumzinho brabo</h1>
-            <div>
-            <nav>
-                <Link to="/">Home</Link>
-                <Link to="/albums">Albums</Link>
-            </nav>
-            <button onClick={signOut}>Logout</button>
-            </div>
-        </div>
-    )
+export default function Navbar() {
+  const { signOut } = useAuth();
+  return (
+    <div className="bg-indigo-200">
+      <h1 className="w-full text-3xl ml-2">Albumzinho brabo</h1>
+      <div className="flex flex-row justify-between">
+        <nav>
+          <Link className="p-2 text-lg" to="/">
+            Home
+          </Link>
+          <Link className="p-2 text-lg" to="/albums">
+            Albums
+          </Link>
+        </nav>
+        <button className="mr-2" onClick={signOut}>Logout</button>
+      </div>
+    </div>
+  );
 }
-
