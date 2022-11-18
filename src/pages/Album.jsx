@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import Page from "../components/Page";
 import NewPageModal from "../components/NewPageModal";
 import Navbar from "../components/Navbar";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 export default function Album() {
   const [album, setAlbum] = useState({});
@@ -30,7 +31,9 @@ export default function Album() {
   }
 
   function handleNewPage() {
-    setCreatingNewPage(true);
+    creatingNewPage == false
+      ? setCreatingNewPage(true)
+      : setCreatingNewPage(false);
   }
 
   async function fechPages() {
@@ -66,14 +69,13 @@ export default function Album() {
   } else {
     if (pages) {
       return (
-        <>
+        <div className="bg-blue-50 h-screen">
           <Navbar />
           <NewPageModal
             creatingNewPage={creatingNewPage}
             album_id={album_id}
             onModalClose={handleModalClose}
           />
-          <Button onClick={handleNewPage}>New page</Button>
           {pages.map((page, index) => {
             return (
               <Page
@@ -84,9 +86,23 @@ export default function Album() {
               />
             );
           })}
-          <Button onClick={handleLeftClick}>&#60;</Button>
-          <Button onClick={handleRightClick}>&#62;</Button>
-        </>
+          <div className="flex justify-around mt-5 ">
+            <button
+              className="bg-pink-500 rounded px-4 py-1 text-white text-5xl shadow-md"
+              onClick={handleLeftClick}
+            >
+              <FiArrowLeft />
+            </button>
+            <Button onClick={handleNewPage}>New page</Button>
+
+            <button
+              className="bg-pink-500 rounded px-4 py-1 text-white text-5xl shadow-md"
+              onClick={handleRightClick}
+            >
+              <FiArrowRight />
+            </button>
+          </div>
+        </div>
       );
     } else {
       return (

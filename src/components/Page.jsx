@@ -5,7 +5,7 @@ export default function Page({ details, pageNumber, thisPage }) {
     <div
       className={`${
         pageNumber == thisPage ? "block" : "hidden"}
-         p-4 h-180 flex-col flex justify-center items-center rounded-lg border border-black shadow-2xl`}
+         p-4 h-min flex-col flex justify-center items-center rounded-lg shadow-2xl bg-blue-200`}
     >
       <h3 className="text-4xl text-center">{title}</h3>
       <p className="text-xl">{description}</p>

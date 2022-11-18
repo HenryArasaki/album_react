@@ -9,7 +9,6 @@ import Navbar from "../components/Navbar";
 
 export default function Albums() {
   const [albums, setAlbums] = useState([]);
-  const { signOut, user } = useAuth();
 
   function handleCreateAlbum(){
     let name = prompt("Nome do album.", "Album");
@@ -44,7 +43,7 @@ export default function Albums() {
       <ul>
         {albums &&
           albums.map((album) => {
-            return <li key={album.id}><Link to={`/album/${album.id}`}>{album.name}</Link></li>;
+            return <li key={album.id} className="bg-indigo-300 rounded p-3 m-3"><Link to={`/album/${album.id}`} >{album.name}</Link></li>;
           })}
       </ul>
       <Button onClick={handleCreateAlbum}>Crate new Album</Button>
