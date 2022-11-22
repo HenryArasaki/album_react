@@ -56,7 +56,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="bg-blue-50 h-screen">
+    <div className="bg-slate-100 h-screen">
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="name">
           Name

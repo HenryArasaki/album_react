@@ -69,7 +69,7 @@ export default function Album() {
   } else {
     if (pages) {
       return (
-        <div className="bg-blue-50 h-screen">
+        <div className="bg-slate-100 h-screen">
           <Navbar />
           <NewPageModal
             creatingNewPage={creatingNewPage}
@@ -86,7 +86,7 @@ export default function Album() {
               />
             );
           })}
-          <div className="flex justify-around mt-5 ">
+          <div className="flex justify-around mt-20 ">
             <button
               className="bg-pink-500 rounded px-4 py-1 text-white text-5xl shadow-md"
               onClick={handleLeftClick}

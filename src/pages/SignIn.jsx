@@ -29,7 +29,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="bg-blue-50 h-screen">
+    <div className="bg-slate-100 h-screen">
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="email">
           E-mail
