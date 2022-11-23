@@ -1,17 +1,13 @@
 import { useState } from "react";
 import Button from "./Button";
 import { api } from "../service/api";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
-// https://www.freecodecamp.org/news/how-to-build-a-modal-with-javascript/
 export default function NewPageModal(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [photo, setPhoto] = useState("");
-
-  // const visible = props.visible;
-  // const album_id = props.album_id;
-  // const onModalClose = props.onModalClose;
 
   const { creatingNewPage, album_id, onModalClose } = props;
 
@@ -71,7 +67,12 @@ export default function NewPageModal(props) {
           className="z-20 flex flex-col w-5/6 lg:w-1/2  bg-slate-100 fixed inset-x-0 mx-auto mt-6"
           onSubmit={handleSubmit}
         >
-          <label className="m-5" htmlFor="page-title">
+          <AiOutlineCloseCircle
+            size="1.5em"
+            className="self-end mt-2 mr-2"
+            onClick={onModalClose}
+          />
+          <label className="m-5 -mt-5" htmlFor="page-title">
             Title:
           </label>
           <input
@@ -79,6 +80,7 @@ export default function NewPageModal(props) {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="mx-5"
           />
           <label className="m-5" htmlFor="page-description">
             Description:
@@ -88,6 +90,7 @@ export default function NewPageModal(props) {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            className="mx-5"
           />
           <label className="m-5" htmlFor="page-date">
             Date:
@@ -97,7 +100,7 @@ export default function NewPageModal(props) {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="m-5"
+            className="mx-5"
           />
           <label className="ml-5 mt-5" htmlFor="page-photo">
             Photo:
@@ -108,9 +111,12 @@ export default function NewPageModal(props) {
             // value=""
             accept="image/png, image/gif, image/jpeg"
             onChange={handlePhotoChange}
-            className="m-5"
+            className="mx-5 mb-5"
           />
-          <Button type="submit">Submit</Button>
+          <input
+            className="hover:cursor-pointer bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white w-72 m-5 self-center"
+            type="submit"
+          />
         </form>
       </section>
       <div></div>

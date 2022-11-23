@@ -57,6 +57,7 @@ export default function SignUp() {
 
   return (
     <div className="bg-slate-100 h-screen">
+      <h1 className="w-full text-2xl lg:text-3xl ml-2 text-pink-500 ">Albumzinho brabo</h1>
       <form
         className="w-4/6 flex flex-col justify-end items-start"
         onSubmit={handleFormSubmit}

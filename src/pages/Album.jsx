@@ -88,7 +88,7 @@ export default function Album() {
           })}
           <div className="flex justify-around mt-20 ">
             <button
-              className="bg-pink-500 rounded px-4 py-1 text-white text-5xl shadow-md"
+              className="bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white text-5xl shadow-md"
               onClick={handleLeftClick}
             >
               <FiArrowLeft />
@@ -96,7 +96,7 @@ export default function Album() {
             <Button onClick={handleNewPage}>New page</Button>
 
             <button
-              className="bg-pink-500 rounded px-4 py-1 text-white text-5xl shadow-md"
+              className="bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white text-5xl shadow-md"
               onClick={handleRightClick}
             >
               <FiArrowRight />
