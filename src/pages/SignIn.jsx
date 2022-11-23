@@ -38,6 +38,7 @@ export default function SignIn() {
             id="email"
             name="email"
             onChange={handleEmailChange}
+            className="ml-2"
           />
         </label>
         <label className="m-5"  htmlFor="password">
@@ -48,6 +49,7 @@ export default function SignIn() {
             id="password"
             name="password"
             onChange={handlePasswordChange}
+            className="ml-2"
 
           />
         </label>

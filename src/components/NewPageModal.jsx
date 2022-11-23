@@ -13,10 +13,10 @@ export default function NewPageModal(props) {
   // const album_id = props.album_id;
   // const onModalClose = props.onModalClose;
 
-  const {creatingNewPage,album_id,onModalClose} = props
+  const { creatingNewPage, album_id, onModalClose } = props;
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (!title || !date || !photo) {
       return alert("Preencha todos os dados");
     }
@@ -63,42 +63,55 @@ export default function NewPageModal(props) {
   return (
     <div className={creatingNewPage == true ? "block" : "hidden"}>
       <section className="w-screen h-screen fixed">
-        <div className="w-screen h-screen bg-black opacity-80 z-10" onClick={onModalClose}>
-          <form className="z-20 bg-slate-100 flex flex-col w-5/6 lg:w-1/2 2xl:w-2/5 m-auto" onSubmit={handleSubmit}>
-            <label className="m-5" htmlFor="page-title">Title:</label>
-            <input
-              id="page-title"
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <label className="m-5" htmlFor="page-description">Description:</label>
-            <input
-              id="page-description"
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <label className="m-5" htmlFor="page-date">Date:</label>
-            <input
-              id="page-date"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="m-5"
-            />
-            <label className="ml-5 mt-5" htmlFor="page-photo">Photo:</label>
-            <input
-              id="page-photo"
-              type="file"
-              // value=""
-              accept="image/png, image/gif, image/jpeg"
-              onChange={handlePhotoChange}
-              className="m-5"
-            />
-            <Button type="submit">Submit</Button>
-          </form>
-        </div>
+        <div
+          className="w-screen h-screen bg-black opacity-80 z-10 fixed"
+          onClick={onModalClose}
+        ></div>
+        <form
+          className="z-20 flex flex-col w-5/6 lg:w-1/2  bg-slate-100 fixed inset-x-0 mx-auto mt-6"
+          onSubmit={handleSubmit}
+        >
+          <label className="m-5" htmlFor="page-title">
+            Title:
+          </label>
+          <input
+            id="page-title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <label className="m-5" htmlFor="page-description">
+            Description:
+          </label>
+          <input
+            id="page-description"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <label className="m-5" htmlFor="page-date">
+            Date:
+          </label>
+          <input
+            id="page-date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="m-5"
+          />
+          <label className="ml-5 mt-5" htmlFor="page-photo">
+            Photo:
+          </label>
+          <input
+            id="page-photo"
+            type="file"
+            // value=""
+            accept="image/png, image/gif, image/jpeg"
+            onChange={handlePhotoChange}
+            className="m-5"
+          />
+          <Button type="submit">Submit</Button>
+        </form>
       </section>
       <div></div>
     </div>

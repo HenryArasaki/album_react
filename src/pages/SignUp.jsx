@@ -69,6 +69,8 @@ export default function SignUp() {
             id="name"
             name="name"
             onChange={handleNameChange}
+            className="ml-2"
+
           />
         </label>
         <label className="m-5" htmlFor="email">
@@ -79,6 +81,8 @@ export default function SignUp() {
             id="email"
             name="email"
             onChange={handleEmailChange}
+            className="ml-2"
+
           />
         </label>
         <label className="m-5" htmlFor="password">
@@ -89,6 +93,8 @@ export default function SignUp() {
             id="password"
             name="password"
             onChange={handlePasswordChange}
+            className="ml-2"
+
           />
         </label>
         <label className="m-5" htmlFor="password2">
@@ -99,6 +105,8 @@ export default function SignUp() {
             id="password2"
             name="password2"
             onChange={handlePassword2Change}
+            className="ml-2"
+
           />
         </label>
         <input
