@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../hooks/auth";
 
@@ -9,10 +9,9 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const {signIn} = useAuth()
-
+  const { signIn } = useAuth();
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -22,16 +21,16 @@ export default function SignIn() {
     setPassword(e.target.value);
   }
 
-  function handleFormSubmit(e){
-    e.preventDefault()
-    signIn({email,password})
-    navigate("/")
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    signIn({ email, password });
+    navigate("/");
   }
 
   return (
     <div className="bg-slate-100 h-screen">
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="email">
+      <form className="w-4/6 flex flex-col justify-end items-start" onSubmit={handleFormSubmit}>
+        <label className="m-5" htmlFor="email">
           E-mail
           <input
             type="email"
@@ -41,7 +40,7 @@ export default function SignIn() {
             onChange={handleEmailChange}
           />
         </label>
-        <label htmlFor="password">
+        <label className="m-5"  htmlFor="password">
           Password
           <input
             type="password"
@@ -49,11 +48,12 @@ export default function SignIn() {
             id="password"
             name="password"
             onChange={handlePasswordChange}
+
           />
         </label>
-        <Button><input className="hover:cursor-pointer" type="submit"/></Button>
+          <input className="hover:cursor-pointer bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white w-72 m-5" type="submit" />
       </form>
-      <Link to="/signup">SignUp</Link>
+      <Link className="m-5 text-slate-600 hover:text-slate-900" to="/signup">SignUp</Link>
     </div>
   );
 }

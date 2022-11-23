@@ -62,37 +62,39 @@ export default function NewPageModal(props) {
 
   return (
     <div className={creatingNewPage == true ? "block" : "hidden"}>
-      <section>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="page-title">Title:</label>
+      <section className="w-screen h-screen fixed">
+        <div className="w-screen h-screen bg-black opacity-80 z-10" onClick={onModalClose}>
+          <form className="z-20 bg-slate-100 flex flex-col w-5/6 lg:w-1/2 2xl:w-2/5 m-auto" onSubmit={handleSubmit}>
+            <label className="m-5" htmlFor="page-title">Title:</label>
             <input
               id="page-title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <label htmlFor="page-description">Description:</label>
+            <label className="m-5" htmlFor="page-description">Description:</label>
             <input
               id="page-description"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <label htmlFor="page-date">Date:</label>
+            <label className="m-5" htmlFor="page-date">Date:</label>
             <input
               id="page-date"
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
+              className="m-5"
             />
-            <label htmlFor="page-photo">Photo:</label>
+            <label className="ml-5 mt-5" htmlFor="page-photo">Photo:</label>
             <input
               id="page-photo"
               type="file"
               // value=""
               accept="image/png, image/gif, image/jpeg"
               onChange={handlePhotoChange}
+              className="m-5"
             />
             <Button type="submit">Submit</Button>
           </form>
