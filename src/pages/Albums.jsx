@@ -46,7 +46,7 @@ export default function Albums() {
 
   useEffect(() => {
     fetchAlbums();
-  });
+  },[]);
 
   if (isLoading) {
     return (
