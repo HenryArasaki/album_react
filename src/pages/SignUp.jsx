@@ -10,6 +10,8 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [isLoading, setIsloading] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ export default function SignUp() {
     if (password !== password2) {
       return alert("Senhas diferentes");
     }
-
+    setIsloading(true)
     api
       .post("/users", { name, email, password })
       .then(() => {
@@ -52,6 +54,9 @@ export default function SignUp() {
         } else {
           alert("Não foi possivel cadastrar");
         }
+      })
+      .finally(()=>{
+        setIsloading(false)
       });
   }
 
@@ -111,8 +116,9 @@ export default function SignUp() {
           />
         </label>
         <input
-          className="hover:cursor-pointer bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white w-72 m-5"
+          className={isLoading?"bg-pink-900  rounded px-4 py-1 text-white w-72 m-5":"hover:cursor-pointer bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white w-72 m-5"}
           type="submit"
+          value={isLoading?"Carregando...":"Enviar"}
         />
       </form>
       <Link className="m-5 text-slate-600 hover:text-slate-900" to="/">

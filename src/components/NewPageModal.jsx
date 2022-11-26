@@ -9,6 +9,8 @@ export default function NewPageModal(props) {
   const [date, setDate] = useState("");
   const [photo, setPhoto] = useState("");
 
+  const [isCreating, setIsCreating] = useState(false);
+
   const { creatingNewPage, album_id, onModalClose } = props;
 
   function handleSubmit(e) {
@@ -21,6 +23,7 @@ export default function NewPageModal(props) {
         "Erro no site. Por favor reinicie a pagina e tente novamente"
       );
     }
+    setIsCreating(true);
     api
       .post(`/pages/${album_id}`, { title, description, date, photo })
       .then(() => {
@@ -33,6 +36,9 @@ export default function NewPageModal(props) {
         } else {
           alert("Não foi possivel criar a pagina");
         }
+      })
+      .finally(()=>{
+        setIsCreating(false);
       });
   }
 
@@ -114,8 +120,9 @@ export default function NewPageModal(props) {
             className="mx-5 mb-5"
           />
           <input
-            className="hover:cursor-pointer bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white w-72 m-5 self-center"
+            className={isCreating?" bg-pink-800  rounded px-4 py-1 text-white w-72 m-5 self-center":"hover:cursor-pointer bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white w-72 m-5 self-center"}
             type="submit"
+            value={isCreating?"Carregando...":"Enviar"}
           />
         </form>
       </section>

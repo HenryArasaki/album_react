@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar";
 
 export default function Albums() {
   const [albums, setAlbums] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   function handleCreateAlbum() {
     let name = prompt("Nome do album.", "Album");
@@ -31,19 +32,30 @@ export default function Albums() {
 
   async function fetchAlbums() {
     const response = await api.get("/albums");
-    setAlbums(response.data);
+    await setAlbums(response.data);
+    setIsLoading(false)
+
   }
 
-  async function handleDeleteClick(album_id,album_name){
-    if(confirm(`Deseja excluir o album ${album_name}?`)){
-      await api.delete(`/albums/${album_id}`)
-      fetchAlbums()
+  async function handleDeleteClick(album_id, album_name) {
+    if (confirm(`Deseja excluir o album ${album_name}?`)) {
+      await api.delete(`/albums/${album_id}`);
+      fetchAlbums();
     }
   }
 
   useEffect(() => {
     fetchAlbums();
   });
+
+  if (isLoading) {
+    return (
+      <div className="bg-slate-100 h-screen">
+        <Navbar />
+        <span>Carregando...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-100 h-screen">
@@ -59,7 +71,11 @@ export default function Albums() {
                 <Link className="w-full h-full p-3" to={`/album/${album.id}`}>
                   {album.name}
                 </Link>
-                <AiOutlineDelete onClick={()=>handleDeleteClick(album.id,album.name)} size="1.5em" className="cursor-pointer mx-2" />
+                <AiOutlineDelete
+                  onClick={() => handleDeleteClick(album.id, album.name)}
+                  size="1.5em"
+                  className="cursor-pointer mx-2"
+                />
               </li>
             );
           })}

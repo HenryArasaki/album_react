@@ -14,6 +14,8 @@ export default function Album() {
   const [lastPage, setLastPage] = useState(0);
   const [creatingNewPage, setCreatingNewPage] = useState(false);
   const { album_id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
   // console.log(album_id)
 
   function handleLeftClick() {
@@ -39,7 +41,8 @@ export default function Album() {
   async function fechPages() {
     const response = await api.get(`/albums/${album_id}`);
     setAlbum(response.data);
-    setPages(response.data.pages);
+    await setPages(response.data.pages);
+    setIsLoading(false);
     // console.log(response.data.pages)
   }
   function handleModalClose() {
@@ -57,60 +60,77 @@ export default function Album() {
 
   useEffect(() => {
     setLastPage(pages.length);
+    fechPages();
   }, [pages]);
 
-  if (!album) {
+  if (isLoading) {
     return (
-      <>
+      <div className="bg-slate-100 h-screen">
         <Navbar />
         <span>Carregando...</span>
-      </>
+      </div>
+    );
+  }
+
+  if (pages.length > 0) {
+    return (
+      <div className="bg-slate-100 h-screen">
+        <Navbar />
+        <NewPageModal
+          creatingNewPage={creatingNewPage}
+          album_id={album_id}
+          onModalClose={handleModalClose}
+        />
+        {pages.map((page, index) => {
+          return (
+            <Page
+              pageNumber={pageNumber}
+              thisPage={index}
+              key={page.id}
+              details={page}
+            />
+          );
+        })}
+        <div className="flex justify-around mt-20 ">
+          <button
+            className={
+              pageNumber > 0
+                ? "bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white text-5xl shadow-md"
+                : "bg-pink-800  rounded px-4 py-1 text-white text-5xl shadow-md cursor-default"
+            }
+            onClick={handleLeftClick}
+          >
+            <FiArrowLeft />
+          </button>
+          <Button onClick={handleNewPage}>New page</Button>
+
+          <button
+            className={
+              pageNumber < lastPage - 1
+                ? "bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white text-5xl shadow-md"
+                : "bg-pink-800  rounded px-4 py-1 text-white text-5xl shadow-md cursor-default"
+            }
+            onClick={handleRightClick}
+          >
+            <FiArrowRight />
+          </button>
+        </div>
+      </div>
     );
   } else {
-    if (pages) {
-      return (
-        <div className="bg-slate-100 h-screen">
-          <Navbar />
-          <NewPageModal
-            creatingNewPage={creatingNewPage}
-            album_id={album_id}
-            onModalClose={handleModalClose}
-          />
-          {pages.map((page, index) => {
-            return (
-              <Page
-                pageNumber={pageNumber}
-                thisPage={index}
-                key={page.id}
-                details={page}
-              />
-            );
-          })}
-          <div className="flex justify-around mt-20 ">
-            <button
-              className="bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white text-5xl shadow-md"
-              onClick={handleLeftClick}
-            >
-              <FiArrowLeft />
-            </button>
-            <Button onClick={handleNewPage}>New page</Button>
-
-            <button
-              className="bg-pink-500 hover:bg-pink-600 rounded px-4 py-1 text-white text-5xl shadow-md"
-              onClick={handleRightClick}
-            >
-              <FiArrowRight />
-            </button>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <>
-          <Navbar />
-          <span>Album sem paginas</span>
-        </>
-      );
-    }
+    return (
+      <div className="bg-slate-100 h-screen">
+        <Navbar />
+        <NewPageModal
+          creatingNewPage={creatingNewPage}
+          album_id={album_id}
+          onModalClose={handleModalClose}
+        />
+        <p className="text-3xl m-3">Album sem paginas</p>
+        <Button className="ml-3" onClick={handleNewPage}>
+          New page
+        </Button>
+      </div>
+    );
   }
 }
