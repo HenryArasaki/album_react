@@ -109,7 +109,7 @@ export default function NewPageModal(props) {
             id="page-photo"
             type="file"
             // value=""
-            accept="image/png, image/gif, image/jpeg"
+            accept="image/x-png,image/gif,image/jpeg"
             onChange={handlePhotoChange}
             className="mx-5 mb-5"
           />
