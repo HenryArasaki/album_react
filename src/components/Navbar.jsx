@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/auth";
 export default function Navbar() {
   const { signOut } = useAuth();
   return (
-    <div >
+    <div className="mt-1">
       <h1 className="w-full text-2xl lg:text-3xl ml-2 text-pink-500 ">Albumzinho brabo</h1>
       <div className="flex flex-row justify-between">
         <nav>
