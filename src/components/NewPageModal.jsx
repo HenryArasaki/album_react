@@ -11,7 +11,7 @@ export default function NewPageModal(props) {
 
   const [isCreating, setIsCreating] = useState(false);
 
-  const { creatingNewPage, album_id, onModalClose } = props;
+  const { creatingNewPage, album_id, onModalClose,fechPages } = props;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,6 +28,7 @@ export default function NewPageModal(props) {
       .post(`/pages/${album_id}`, { title, description, date, photo })
       .then(() => {
         alert("Pagina criada com sucesso");
+        fechPages()
         onModalClose();
       })
       .catch((error) => {

@@ -42,6 +42,7 @@ export default function Album() {
     const response = await api.get(`/albums/${album_id}`);
     setAlbum(response.data);
     await setPages(response.data.pages);
+    setLastPage(pages.length);
     setIsLoading(false);
     // console.log(response.data.pages)
   }
@@ -58,10 +59,6 @@ export default function Album() {
     console.log(pageNumber);
   });
 
-  useEffect(() => {
-    setLastPage(pages.length);
-    fechPages();
-  }, [pages]);
 
   if (isLoading) {
     return (
@@ -80,6 +77,7 @@ export default function Album() {
           creatingNewPage={creatingNewPage}
           album_id={album_id}
           onModalClose={handleModalClose}
+          fechPages={fechPages}
         />
         {pages.map((page, index) => {
           return (
