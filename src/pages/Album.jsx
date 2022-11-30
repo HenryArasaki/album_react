@@ -55,9 +55,6 @@ export default function Album() {
     fechPages();
   }, []);
 
-  useEffect(() => {
-    console.log(pageNumber);
-  });
 
 
   if (isLoading) {
