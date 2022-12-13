@@ -52,7 +52,7 @@ export default function Albums() {
     return (
       <div className="bg-slate-100 h-screen">
         <Navbar />
-        <span>Carregando...</span>
+        <span className="ml-5">Carregando...</span>
       </div>
     );
   }

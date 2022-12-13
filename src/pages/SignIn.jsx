@@ -34,9 +34,9 @@ export default function SignIn() {
       <h1 className="w-full text-2xl lg:text-3xl ml-2 text-pink-500 ">
         Albumzinho brabo
       </h1>
-      <div className="ml-auto mr-auto block">
+      <div className="flex flex-col justify-center items-center">
         <form
-          className="w-4/6 flex flex-col justify-end items-start"
+          className="w-auto flex flex-col justify-end items-start"
           onSubmit={handleFormSubmit}
         >
           <label className="m-5" htmlFor="email">
