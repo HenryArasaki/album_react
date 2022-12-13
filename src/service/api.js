@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-    baseURL: "albumexpress-production.up.railway.app"
+    baseURL: "https://album-api.onrender.com"
 })
