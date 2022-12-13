@@ -7,7 +7,7 @@ export default function NewPageModal(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState("");
 
   const [isCreating, setIsCreating] = useState(false);
 
