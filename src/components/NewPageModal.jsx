@@ -30,10 +30,6 @@ export default function NewPageModal(props) {
         alert("Pagina criada com sucesso");
         fechPages()
         onModalClose();
-        setTitle("")
-        setDescription("")
-        setDate("")
-        setPhoto(null)
       })
       .catch((error) => {
         if (error.response) {
@@ -44,6 +40,10 @@ export default function NewPageModal(props) {
       })
       .finally(()=>{
         setIsCreating(false);
+        setTitle("")
+        setDescription("")
+        setDate("")
+        setPhoto(null)
       });
   }
 
