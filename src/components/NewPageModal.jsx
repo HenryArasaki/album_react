@@ -28,8 +28,12 @@ export default function NewPageModal(props) {
       .post(`/pages/${album_id}`, { title, description, date, photo })
       .then(() => {
         alert("Pagina criada com sucesso");
-        fechPages()
+        //fechPages()
         onModalClose();
+        setTitle("")
+        setDescription("")
+        setDate("")
+        setPhoto("")
       })
       .catch((error) => {
         if (error.response) {

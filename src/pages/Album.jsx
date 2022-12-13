@@ -38,9 +38,9 @@ export default function Album() {
 
   async function fechPages() {
     const response = await api.get(`/albums/${album_id}`);
+    console.log(response)
     setAlbum(response.data);
-    await setPages(response.data.pages);
-    setLastPage(pages.length);
+    setPages(response.data.pages);
     setIsLoading(false);
     // console.log(response.data.pages)
   }
@@ -52,6 +52,11 @@ export default function Album() {
   useEffect(() => {
     fechPages();
   }, []);
+
+  useEffect(()=>{
+    setLastPage(pages.length);
+
+  },[pages])
 
 
 

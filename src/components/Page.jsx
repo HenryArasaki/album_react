@@ -11,7 +11,7 @@ export default function Page({ details, pageNumber, thisPage }) {
       <p className="text-xl">{description}</p>
       <img
         // className="rounded-lg shadow-lg h-auto md:w-3/5 2xl:w-2/5 max-h-full"
-        className="rounded-lg shadow-lg max-h-full max-w-full h-auto w-auto"
+        className="rounded-lg shadow-lg max-h-full max-w-full h-2/3 w-auto"
         src={photo}
       />
       <span className="text-l text-right self-end mr-5">{date}</span>
