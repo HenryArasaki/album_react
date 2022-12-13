@@ -21,14 +21,12 @@ export default function Album() {
   function handleLeftClick() {
     if (pageNumber > 0) {
       setPageNumber((prev) => prev - 1);
-      console.log("left");
     }
   }
 
   function handleRightClick() {
     if (pageNumber < lastPage - 1) {
       setPageNumber((prev) => prev + 1);
-      console.log("right");
     }
   }
 

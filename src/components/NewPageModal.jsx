@@ -40,10 +40,6 @@ export default function NewPageModal(props) {
       })
       .finally(()=>{
         setIsCreating(false);
-        setTitle("")
-        setDescription("")
-        setDate("")
-        setPhoto(null)
       });
   }
 
