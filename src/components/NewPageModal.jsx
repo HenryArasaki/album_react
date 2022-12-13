@@ -7,7 +7,7 @@ export default function NewPageModal(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(null);
 
   const [isCreating, setIsCreating] = useState(false);
 
@@ -30,6 +30,10 @@ export default function NewPageModal(props) {
         alert("Pagina criada com sucesso");
         fechPages()
         onModalClose();
+        setTitle("")
+        setDescription("")
+        setDate("")
+        setPhoto(null)
       })
       .catch((error) => {
         if (error.response) {
@@ -71,7 +75,7 @@ export default function NewPageModal(props) {
           onClick={onModalClose}
         ></div>
         <form
-          className="z-20 flex flex-col w-5/6 lg:w-1/2  bg-slate-100 fixed inset-x-0 mx-auto mt-6"
+          className="z-20 flex flex-col w-5/6 lg:w-1/2  bg-slate-100 fixed inset-x-0 mx-auto mt-6 rounded-sm"
           onSubmit={handleSubmit}
         >
           <AiOutlineCloseCircle
